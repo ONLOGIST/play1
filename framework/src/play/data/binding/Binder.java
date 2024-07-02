@@ -431,7 +431,13 @@ public abstract class Binder {
         if (StringUtils.isEmpty(value)) {
             return null;
         }
-        return Enum.valueOf((Class<? extends Enum>) clazz, value);
+        try {
+            return Enum.valueOf((Class<? extends Enum>) clazz, value);
+        } catch (Exception e) {
+            Logger.warn("Could not bind value '%s' to enum %s", value, clazz);
+            addValidationError(paramNode);
+            return MISSING;
+        }
     }
 
     private static Object bindMap(Type type, ParamNode paramNode, BindingAnnotations bindingAnnotations) {
