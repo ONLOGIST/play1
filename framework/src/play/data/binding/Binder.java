@@ -428,7 +428,8 @@ public abstract class Binder {
 
         String value = paramNode.getFirstValue(null);
 
-        if (StringUtils.isEmpty(value)) {
+        // "null" as string can happen b/c of bad type conversion in clients :/
+        if (StringUtils.isEmpty(value) || "null".equals(value)) {
             return null;
         }
         try {
