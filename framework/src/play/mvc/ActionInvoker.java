@@ -86,7 +86,7 @@ public class ActionInvoker {
             request.resolved = true;
 
         } catch (ActionNotFoundException e) {
-            Logger.error(e, "%s action not found", e.getAction());
+            Logger.error("%s action not found", e.getAction());
             throw new NotFound(String.format("%s action not found", e.getAction()));
         }
 
